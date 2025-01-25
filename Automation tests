@@ -1,0 +1,136 @@
+describe('Ecommerce Application Login',async()=>
+
+{
+
+it('Login Fail Page',async()=>
+{
+await browser.url("https://www.saucedemo.com/")
+await expect(browser).toHaveTitle('Swag Labs')
+await $("#user-name").setValue("standard_user")
+const password = $("#password")
+await password.setValue("khhgkjkjh")
+await $("#login-button").click()
+const element = await $('.error-message-container')
+await expect(element).toHaveText('Epic sadface: Username and password do not match any user in this service')
+
+
+})
+
+})
+
+
+it('Login Success Page',async()=> {
+
+await browser.url("https://www.saucedemo.com/")
+await $("#user-name").setValue("standard_user")
+const password = $("#password")
+await password.setValue("secret_sauce")
+await $("#login-button").click()
+await expect(browser).toHaveUrl(expect.stringContaining('inventory.html'))
+await expect(browser).toHaveTitle('Swag Labs')
+
+
+})
+
+
+
+
+describe('Add to Cart',async()=>
+
+    {
+    
+    it('Add items to Cart',async()=>
+    {
+    await browser.url("https://www.saucedemo.com/")
+    await expect(browser).toHaveTitle('Swag Labs')
+    await $("#user-name").setValue("standard_user")
+    const password = $("#password")
+    await password.setValue("secret_sauce")
+    await $("#login-button").click()
+    const addBackpack = $("#add-to-cart-sauce-labs-backpack")
+    await addBackpack.click()
+    const addBikeLight = $("#add-to-cart-sauce-labs-bike-light")
+    await addBikeLight.click()
+    const removeBtn = await $('#remove-sauce-labs-backpack')
+    await expect(removeBtn).toBeDisplayed()
+
+    
+    
+    })
+    
+    })
+
+
+
+describe('Remove items from Cart',async()=>
+
+    {
+    
+    it('Remove items',async()=>
+    {
+    await browser.url("https://www.saucedemo.com/")
+    await expect(browser).toHaveTitle('Swag Labs')
+    await $("#user-name").setValue("standard_user")
+    const password = $("#password")
+    await password.setValue("secret_sauce")
+    await $("#login-button").click()
+    const addBackpack = $("#add-to-cart-sauce-labs-backpack")
+    await addBackpack.click()
+    const addBikeLight = $("#add-to-cart-sauce-labs-bike-light")
+    await addBikeLight.click()
+    const removeBtn = await $('#remove-sauce-labs-backpack')
+    await expect(removeBtn).toBeDisplayed()
+    const removeBackpackFromCart = $("#remove-sauce-labs-backpack")
+    await removeBackpackFromCart.click()
+    const removeBikelightFromCart = $("#remove-sauce-labs-bike-light")
+    await removeBikelightFromCart.click()
+    
+    
+    })
+    
+    })
+
+
+
+describe('Filter items on products page',async()=>
+
+    {
+    
+    it('Filter products by price',async()=>
+    {
+    await browser.url("https://www.saucedemo.com/")
+    await expect(browser).toHaveTitle('Swag Labs')
+    await $("#user-name").setValue("standard_user")
+    const password = $("#password")
+    await password.setValue("secret_sauce")
+    await $("#login-button").click()
+    const filterDropdown = await $(".product_sort_container")
+    filterDropdown.selectByAttribute('value','lohi')
+    filterDropdown.selectByVisibleText('Price (high to low)')
+    console.log(await filterDropdown.getValue())
+   
+    
+    
+    })
+
+    it('Filter products by alphabet',async()=>
+        {
+        await browser.url("https://www.saucedemo.com/")
+        await expect(browser).toHaveTitle('Swag Labs')
+        await $("#user-name").setValue("standard_user")
+        const password = $("#password")
+        await password.setValue("secret_sauce")
+        await $("#login-button").click()
+        const filterDropdown = await $(".product_sort_container")
+        filterDropdown.selectByAttribute('value','az')
+        filterDropdown.selectByVisibleText('Name (Z to A)')
+        console.log(await filterDropdown.getValue())
+   
+        
+        
+        })
+    
+    })
+    
+
+    
